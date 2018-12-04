@@ -1,0 +1,28 @@
+server:
+  port: 8001
+ 
+mybatis:
+  config-location: classpath:mybatis/mybatis.cfg.xml      #mybatis配置文件所在路径
+  type-aliases-package: com.atlunk.springcloud.entities   #所有Entity别名所在包
+  mapper-locations:
+  - classpath:mybatis/mapper/**/*.xml                     #mapper映射文件，*就表示了所有的文件，但是“*”并不包括子目录下的文件；“**”匹配包含任意级子目录中所有的文件、
+  
+spring:
+  application:
+    name: microservicecloud-dept                          #对外暴露的微服务名字
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource          #当前数据源操作类型
+    driver-class-name: com.mysql.jdbc.Driver              #mysql驱动包
+    url: jdbc:mysql://localhost:3306/cloudDB01            #数据库名称
+    username: root
+    password: root
+    dbcp2:
+      min-idle: 5                                         #数据库连接池的最小连接数
+      initial-size: 5                                     #初始化连接数
+      max-idle: 5                                         #最大连接数
+      max-wait-millis: 200                                #等待链接获取的最大超时时间    
+  
+eureka:
+  client: #客户端注册进eureka服务列表
+    service-url:
+      defaultZone: http://localhost:7001/eureka #eureka的服务地址,即我8001要入住的eureka

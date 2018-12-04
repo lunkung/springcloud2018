@@ -1,0 +1,14 @@
+1. eureka采用了c-s设计架构.作为服务注册功能的服务器，它是服务注册中心。
+2. 而系统中的其他微服务，使用Eureka的客户端连接到Eureka server并维持心跳。
+3. 这样系统的维护人员就可以通过Eureka server来监控系统中各个微服务是否正常。
+4. Spring cloud的一些其他模块(比如Zuul)就可通过Eureka server来发现系统中的其他微服务，并执行相关逻辑.
+5. Eureka包含两大组件{
+	a. Eureka server
+	b. Eureka Client
+}
+6. Eureka server提供服务注册，各个节点启动后会在Eureka中注册，这样Eurekaserver的服务注册表中将会存储所有服务节点的信息，
+服务节点的信息可以在界面中直观的看到.
+
+7. EurekaCLient是一个Java客户端，用于简化Eureka的交互，客户端同事也具备一个内含子的，使用轮询(round-robin)
+负载算法的负载均衡器。在应用启动后将会默认向Eureka Server发送心跳（默认周期位30s）。如果EurekaServer在多个心跳
+周期没有接受到某个节点的心跳，EurekaServer将会从服务注册表中把这个心跳移除.
